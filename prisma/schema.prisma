@@ -9,27 +9,38 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
 model solanaKeypair {
-  id Int @id @default(autoincrement())
-  publicKey String
+  id         Int      @id @default(autoincrement())
+  publicKey  String
   privateKey String
-  createdAt DateTime @default(now())
-  user User @relation(fields: [userId], references: [id])
-  userId Int
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+
   @@unique([publicKey, privateKey])
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  userId String
-  username String
-  publicKey String
-  privateKey String
-  createdAt DateTime @default(now())
+  id            String          @id @default(cuid())
+  name          String
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  publicKey     String
+  privateKey    String
+  createdAt     DateTime        @default(now())
   solanaKeypair solanaKeypair[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
 }

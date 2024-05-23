@@ -2,6 +2,7 @@
   "name": "volume-bot",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,12 +10,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.1.0",
     "@prisma/client": "^5.14.0",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.379.0",
     "next": "14.2.3",
+    "next-auth": "^5.0.0-beta.18",
+    "nodemailer": "^6.9.13",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.3.0",
