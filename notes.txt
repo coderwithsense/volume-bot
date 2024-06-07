@@ -1,0 +1,7 @@
+setPublicKey not working fine: [ERROR_UPDATING_USER] Error: PrismaClient is unable to run in this browser environment, or has been bundled for the browser (running in `unknown`).
+If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-report
+    at Object.get (index-browser.js:194:15)
+    at updateUser (user-data.ts:46:37)
+    at onSubmit (privateKey-Form.tsx:34:51)
+    at eval (index.esm.mjs:2254:23)
+

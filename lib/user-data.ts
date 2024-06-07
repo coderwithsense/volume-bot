@@ -15,17 +15,15 @@ const createUser = async (username: string) => {
     }
     const user = await prismadb.user.findUnique({
         where: {
-            id: userIdString,
             userId: userIdString,
         }
     });
     if (user) {
         console.log("User already exists");
     }
-    if(!userId) {
+    if(!user) {
         const newUser = await prismadb.user.create({
             data: {
-                id: userIdString,
                 userId: userIdString,
                 username: username,
             }
@@ -37,10 +35,27 @@ const createUser = async (username: string) => {
 const getUser = async (userId: string) => {
     const user = await prismadb.user.findUnique({
         where: {
-            id: userId,
+            userId: userId,
         }
     });
     return user;
+}
+
+const updateUser = async (userId: string, fields?: any) => {
+    try {
+        const user = await prismadb.user.update({
+            where: {
+                userId: userId as any,
+            },
+            data: fields
+        })
+        return {success: true, user: user};
+    }
+    catch (e) {
+        const error = e as Error;
+        console.log("[ERROR_UPDATING_USER]", error);
+        return {success: false, error: "Something seems off! Check your data you sent maybe!"}
+    }
 }
 
 const createKeypair = async (amount: number) => {
@@ -60,7 +75,7 @@ const createKeypair = async (amount: number) => {
             data: {
                 publicKey: keypair.publicKey.toString(),
                 privateKey: base58.encode(keypair.secretKey),
-                userId: "mongoose"
+                userId: userId,
             }
         })
     }
@@ -97,4 +112,4 @@ const createBot = async (
     // })
 }
 
-export {createUser, createKeypair, createBot, getUser};
+export {createUser, createKeypair, createBot, getUser, updateUser};
