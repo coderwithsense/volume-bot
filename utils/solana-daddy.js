@@ -59,4 +59,4 @@ const pool = async () => {
 }
 // pool();
 
-export { createKeypair, getSolBalance };
+export { createKeypair, getSolBalance, getAddressFromPrivateKey };

@@ -19,8 +19,8 @@ model solanaKeypair {
   publicKey String
   privateKey String
   createdAt DateTime @default(now())
-  user User @relation(fields: [userId], references: [id])
-  userId Int
+  user User @relation(fields: [userId], references: [userId])
+  userId String
   @@unique([publicKey, privateKey])
 }
 
@@ -44,6 +44,6 @@ model Bot {
   expiryDate DateTime
   expiredAt DateTime?
   createdAt DateTime @default(now())
-  userId Int
-  user User @relation(fields: [userId], references: [id])
+  userId String
+  user User @relation(fields: [userId], references: [userId])
 }

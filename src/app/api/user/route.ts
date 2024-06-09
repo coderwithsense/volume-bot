@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { createUser, getUser, updateUser } from "../../../../lib/user-data";
+import prismadb from "../../../../lib/prismadb";
 
 export async function GET(
     req: Request,
@@ -24,10 +25,6 @@ export async function POST (
     req: Request,
 ) {
     try {
-        // const {userId} = auth();
-        // if(!userId) {
-        //     return new NextResponse("Unauthorized", {status: 401});
-        // }
         const {userId, changes} = await req.json();
         if (!userId){
             return NextResponse.json({response: "No userId provided"}, {status: 400});

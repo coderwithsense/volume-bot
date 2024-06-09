@@ -9,6 +9,7 @@ import { Button } from "../ui/button";
 import { updateUser } from "../../../lib/user-data";
 import { auth } from "@clerk/nextjs/server";
 import { UserRoundIcon } from "lucide-react";
+import { getAddressFromPrivateKey } from "$/solana-daddy";
 
 const formSchema = z.object({
     privateKey: z.string().refine(value => value.length === 88, {
@@ -28,12 +29,13 @@ const PrivateKeyForm = (props: Props) => {
             // const setPrivateKey = await updateUser(props.userId as any, {privateKey: values.privateKey});
             // if(setPrivateKey.success) console.log("Private key set successfully");
             // else console.log("Error setting private key");
+            const publicAddress = getAddressFromPrivateKey(values.privateKey    );
             fetch('/api/user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({userId: props.userId, changes: {privateKey: values.privateKey}}),
+                body: JSON.stringify({userId: props.userId, changes: {privateKey: values.privateKey, publicKey: publicAddress}}),
             })
             .then((response) => alert("Private key set successfully"))
         } catch (e) {
@@ -67,7 +69,7 @@ const PrivateKeyForm = (props: Props) => {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">SET ()</Button>
+                <Button type="submit">SET</Button>
             </form>
         </Form>
     )
