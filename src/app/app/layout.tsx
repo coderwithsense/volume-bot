@@ -62,7 +62,7 @@ export default function RootLayout({
               <div className="flex gap-4">
 
                 <UserButton />
-              <Badge variant="outline">Akshat Rana</Badge>
+                <Badge>Admin</Badge>
 
               </div>
             </div>

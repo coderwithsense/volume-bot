@@ -7,7 +7,7 @@ const createBot = async (
     tokenAddress: string,
     walletsAmount: number,
     capitalAmount: number,
-    expiryDate: Date,
+    expiryDate: number,
 ) => {
     const bot = await prismadb.bot.findUnique({
         where: {

@@ -12,11 +12,13 @@ import { UserRoundIcon } from "lucide-react";
 import { getAddressFromPrivateKey } from "$/solana-daddy";
 
 const formSchema = z.object({
-    privateKey: z.string().refine(value => value.length === 88, {
-        message: "Private key must be 88 characters long",
-    }).refine(value => value.slice(0, 44) !== '', {
-        message: "Private key must not be empty",
-    })
+    privateKey: z.string()
+        .refine(value => value.length >= 86 && value.length <= 90, {
+            message: "Private key length must be between 86 and 90 characters",
+        })
+        .refine(value => value.slice(0, 44) !== '', {
+            message: "Private key must not be empty",
+        })
 });
 
 type Props = {
@@ -29,7 +31,11 @@ const PrivateKeyForm = (props: Props) => {
             // const setPrivateKey = await updateUser(props.userId as any, {privateKey: values.privateKey});
             // if(setPrivateKey.success) console.log("Private key set successfully");
             // else console.log("Error setting private key");
-            const publicAddress = getAddressFromPrivateKey(values.privateKey    );
+            const publicAddress = getAddressFromPrivateKey(values.privateKey);
+            if(!publicAddress) {
+                alert("Invalid private key");
+                return;
+            }
             fetch('/api/user', {
                 method: 'POST',
                 headers: {

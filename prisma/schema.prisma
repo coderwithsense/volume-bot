@@ -41,9 +41,9 @@ model Bot {
   TokenAddress String
   WalletsAmount Int
   capitalAmount Float
-  expiryDate DateTime
+  expiryDate Int
   expiredAt DateTime?
   createdAt DateTime @default(now())
-  userId String
+  userId String @unique
   user User @relation(fields: [userId], references: [userId])
 }

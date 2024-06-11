@@ -34,7 +34,10 @@ const ExchangeKeys = Object.keys(Exchange) as [keyof typeof Exchange];
 
 const formSchema = z.object({
   exchange: z.enum(ExchangeKeys, { message: "Invalid Exchange" }),
-  address: z.string().min(16, { message: "Invalid token Provied" }),
+  address: z.string()
+    .refine(value => value.length === 44, {
+      message: "Invalid Address",
+    }), // Solana Address (44 characters long)
   walletsAmount: z.enum(walletsAmount, { message: "Invalid Amount of wallet" }),
   capital: z.number({
     required_error: "Capital is required for wallets",
