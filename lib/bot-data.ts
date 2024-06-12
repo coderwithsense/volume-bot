@@ -18,7 +18,7 @@ const createBot = async (
         console.log("Bot already exists");
         return;
     }
-    // create bot 
+    // create bot
     const newBot = await prismadb.bot.create({
         data: {
             exchange: exchange,
