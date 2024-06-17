@@ -3,6 +3,39 @@ import { initRaydiumSdk } from "../config";
 import base58 from "bs58";
 import { SolanaTracker } from "solana-swap";
 
+class Bot {
+  constructor(keypair, rpcUrl, exchange, capitalAmount, expiryDate, walletAmount) {
+    this.keypair = keypair;
+    this.connection = new Connection(rpcUrl);
+    this.address = getAddressFromPrivateKey(this.keypair.secretKey);
+    this.capitalAmount = capitalAmount;
+    this.exchange = exchange;
+    this.expiryDate = expiryDate;
+    this.walletAmount = walletAmount;
+    generateWallets();
+
+  }
+
+  async generateWallets() {
+    const wallets = [];
+    for (let i = 0; i < this.walletAmount; i++) {
+      wallets.push(Keypair.generate());
+    }
+    this.wallets = wallets;
+    
+    return wallets;
+  }
+
+  async getBalance() {
+    const balance = await this.connection.getBalance(this.address);
+    return balance;
+  }
+
+  async swap(address, token, amount, slippage, priorityFee) {
+    
+  }
+}
+
 function getKeypair(secretKey) {
   const keypair = new Keypair.fromSecretKey(base58.decode(secretKey));
   return keypair;

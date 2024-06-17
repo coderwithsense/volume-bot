@@ -5,3 +5,8 @@ If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-r
     at onSubmit (privateKey-Form.tsx:34:51)
     at eval (index.esm.mjs:2254:23)
 
+working on 
+- keypair-data.ts createKeypairs 
+- POST, keypair.ts
+
+BE USEFUL TO YOURSELF ATLEAST...
