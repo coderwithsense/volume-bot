@@ -31,12 +31,12 @@ export async function POST(
     req: Request,
 ) {
     try {
-        const { userId, botName, exchange, tokenAddress, walletsAmount, capitalAmount, expiryDate, overwrite} = await req.json();
-        if(!userId) {
-            return new NextResponse("Unauthorized", {status: 401});
+        const { userId, botName, exchange, tokenAddress, walletsAmount, capitalAmount, expiryDate, overwrite } = await req.json();
+        if (!userId) {
+            return new NextResponse("Unauthorized", { status: 401 });
         }
-        if(!botName || !exchange || !tokenAddress || !walletsAmount || !capitalAmount || !expiryDate) {
-            return new NextResponse("Missing fields", {status: 400});
+        if (!botName || !exchange || !tokenAddress || !walletsAmount || !capitalAmount || !expiryDate) {
+            return new NextResponse("Missing fields", { status: 400 });
         }
         // check if bot already exists
         const botExists = await prismadb.bot.findUnique({
@@ -45,7 +45,7 @@ export async function POST(
             }
         })
         if (botExists && !overwrite) {
-            return new NextResponse("Bot already exists, use overwrite: true, if you want to delete and make a new one.", {status: 409});
+            return new NextResponse("Bot already exists, use overwrite: true, if you want to delete and make a new one.", { status: 409 });
         } else if (botExists && overwrite) {
             await prismadb.bot.delete({
                 where: {
@@ -53,7 +53,7 @@ export async function POST(
                 }
             })
         }
-        
+
         const bot = await createBot(userId, botName, exchange, tokenAddress, walletsAmount, capitalAmount, expiryDate);
         return NextResponse.json({ bot }, { status: 200 });
     } catch (e) {

@@ -34,10 +34,9 @@ const ExchangeKeys = Object.keys(Exchange) as [keyof typeof Exchange];
 
 const formSchema = z.object({
   exchange: z.enum(ExchangeKeys, { message: "Invalid Exchange" }),
-  address: z.string()
-    .refine(value => value.length === 44, {
-      message: "Invalid Address",
-    }), // Solana Address (44 characters long)
+  address: z.string().refine((value) => value.length === 44, {
+    message: "Invalid Address",
+  }), // Solana Address (44 characters long)
   walletsAmount: z.enum(walletsAmount, { message: "Invalid Amount of wallet" }),
   capital: z.number({
     required_error: "Capital is required for wallets",
@@ -59,7 +58,7 @@ const DetailsForm = (props: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
-    
+
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
