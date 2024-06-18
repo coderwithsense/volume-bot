@@ -12,31 +12,44 @@ const createKeypairs = async (userId: string, amount: number) => {
         console.log("[ERROR_GENERATING_KEYPAIRS]: Too many keys requested");
         return;
     }
-    const keypairs = [];
-    for (let i=0; i<amount; i++){
-        const keypair = Keypair.generate();
-        keypairs.push(keypair);
-        // await prismadb.solanaKeypair.createMany({
-        //     data: {
-        //         [
-        //             {publicKey:}
-        //         ]
-        //     }
-        // })
+    try {
+        const keypairs = [];
+        for (let i = 0; i < amount; i++) {
+            const keypair = Keypair.generate();
+            keypairs.push({
+                publicKey: keypair.publicKey.toString(),
+                privateKey: base58.encode(keypair.secretKey),
+                userId: userId
+            });
+            // await prismadb.solanaKeypair.createMany({
+            //     data: {
+            //         [
+            //             {publicKey:}
+            //         ]
+            //     }
+            // })
 
-        // await prismadb.solanaKeypair.create({
-        //     data: {
-        //         publicKey: keypair.publicKey.toString(),
-        //         privateKey: base58.encode(keypair.secretKey),
-        //         user: {
-        //             connect: {
-        //                 userId: userId as string,
-        //             }
-        //         }
-        //     }
-        // })
+            // await prismadb.solanaKeypair.create({
+            //     data: {
+            //         publicKey: keypair.publicKey.toString(),
+            //         privateKey: base58.encode(keypair.secretKey),
+            //         user: {
+            //             connect: {
+            //                 userId: userId as string,
+            //             }
+            //         }
+            //     }
+            // })
+        }
+        await prismadb.solanaKeypair.createMany({
+            data: keypairs
+        })
+        return { success: true, keypairs: keypairs };
+    }catch (e) {
+        const error = e as Error;
+        console.log("[ERROR_GENERATING_KEYPAIRS]", error);
+        return { success: false, error: "Something seems off! Check your data you sent maybe!" }
     }
-    console.log("[KEYPAIR_GENERATION_SUCCESS]", keypairs);
 }
 
 export default createKeypairs;
