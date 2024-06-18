@@ -6,7 +6,8 @@ If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-r
     at eval (index.esm.mjs:2254:23)
 
 working on 
-- keypair-data.ts createKeypairs 
-- POST, keypair.ts
+- keypair-data.ts createKeypairs (*works)
+- POST, keypair.ts (*works)
+- BOT create, update, start working
 
 BE USEFUL TO YOURSELF ATLEAST...
