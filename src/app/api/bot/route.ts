@@ -46,15 +46,38 @@ export async function POST(
         })
         if (botExists && !overwrite) {
             return new NextResponse("Bot already exists, use overwrite: true, if you want to delete and make a new one.", { status: 409 });
-        } else if (botExists && overwrite) {
+        }
+        if (botExists && overwrite) {
             await prismadb.bot.delete({
                 where: {
                     userId: userId
                 }
             })
         }
-
         const bot = await createBot(userId, botName, exchange, tokenAddress, walletsAmount, capitalAmount, expiryDate);
+        // creating keypairs for the bot
+        fetch("http://localhost:3000/api/keypair",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    userId: userId,
+                    amount: walletsAmount,
+                    overwrite: true
+                })
+            }
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("🚀 ~ .then ~ data:", data)
+            })
+            .catch((e) => {
+                console.log("🚀 ~ .catch ~ e", e)
+                return new NextResponse("Internal Error, creating keypairs", { status: 500 });
+            })
+        // end of creating keypairs
         return NextResponse.json({ bot }, { status: 200 });
     } catch (e) {
         console.log("[BOT_GENERATION_ERROR]", e);

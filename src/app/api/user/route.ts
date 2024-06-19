@@ -13,7 +13,7 @@ export async function GET(
         }
         createUser(userId);
         const user = await getUser(userId);
-        console.log("[USER_FETCH_SUCCESS]", user);
+        // console.log("[USER_FETCH_SUCCESS]", user);
         return NextResponse.json({user: user}, {status: 200});
     } catch (e) {
         console.log("[USER_FETCH_ERROR]", e);
