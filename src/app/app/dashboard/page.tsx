@@ -8,6 +8,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { getSolBalance } from "$/solana-daddy";
 import { set } from "react-hook-form";
+import { auth } from "@clerk/nextjs/server";
 
 type Props = {};
 
@@ -24,6 +25,9 @@ const page = (props: Props) => {
         },
       });
       const data = await response.json();
+      if (data.user.privateKey == null) {
+        return setError("Invalid Private Key, change in settings");
+      }
       const solBalance = await getSolBalance(data.user.privateKey);
       // console.log("solana balance: ", solBalance);
       if (solBalance == null) {

@@ -1,5 +1,5 @@
 import { Keypair, Connection, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { initRaydiumSdk } from "../config";
+import { initRaydiumSdk } from "../config.js";
 import base58 from "bs58";
 import { SolanaTracker } from "solana-swap";
 
@@ -37,7 +37,7 @@ class Bot {
 }
 
 function getKeypair(secretKey) {
-  const keypair = new Keypair.fromSecretKey(base58.decode(secretKey));
+  const keypair = Keypair.fromSecretKey(base58.decode(secretKey));
   return keypair;
 }
 
@@ -62,7 +62,7 @@ async function swapTokenInstructions(
     const keypair = getKeypair(secretKey);
     const solanaTracker = new SolanaTracker(
       keypair,
-      process.env.NEXT_PUBLIC_SOLANA_RPC_URL
+      "https://solana-mainnet.g.alchemy.com/v2/CJgyaDQq3FOXk6gmFEi0cDm8Te9beZoM"
     );
     const swapResponse = await solanaTracker.getSwapInstructions(
       "So11111111111111111111111111111111111111112", // From Sol
@@ -73,6 +73,7 @@ async function swapTokenInstructions(
       priorityFee ? priorityFee : 0.00005, // Priority fee (Recommended while network is congested)
       true // Force legacy transaction for Jupiter
     );
+    
     return {
       success: true,
       data: swapResponse,
@@ -131,5 +132,18 @@ const pool = async () => {
   const p = await getTokenPool();
   console.log(p);
 };
+
+// async function main() {
+//   const instructions = await swapTokenInstructions(
+//     "5vRKt7xWDSQjFXDnuvsPY8QhYfGYNQSKyqocWgGm3hfkWKCn5XvLvNzuK6T6mb872ar9Uxw2gWHENdsMLBxMdLoR",
+//     "4Cnk9EPnW5ixfLZatCPJjDB1PUtcRpVVgTQukm9epump",
+//     1,
+//     30,
+//     0.00005
+//   );
+//   console.log(instructions);
+// }
+
+// main();
 
 export { createKeypair, getSolBalance, getAddressFromPrivateKey, swapTokenInstructions };

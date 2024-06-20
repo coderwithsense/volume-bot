@@ -1,4 +1,4 @@
-import { Cluster, Raydium, TxVersion, parseTokenAccountResp } from '@raydium-io/raydium-sdk-v2'
+import { Raydium, TxVersion, parseTokenAccountResp } from '@raydium-io/raydium-sdk-v2'
 import { TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { Connection, Keypair, clusterApiUrl } from '@solana/web3.js';
 import base58 from 'bs58';

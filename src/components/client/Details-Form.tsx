@@ -22,10 +22,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { number, z } from "zod";
 import { Button } from "@/components/ui/button";
+import { auth } from "@clerk/nextjs/server";
 
 enum Exchange {
-  BTC = "BTC",
-  JUPTIER = "JPT",
+  JUPITER = "JUPITER",
+  RAYDIUM = "RAYDIUM",
 }
 
 const walletsAmount = ["50", "100", "500"] as const;
@@ -51,15 +52,35 @@ const DetailsForm = (props: Props) => {
     defaultValues: {
       address: "",
       walletsAmount: walletsAmount[0],
-      exchange: Exchange.BTC,
+      exchange: Exchange.RAYDIUM as any,
       capital: 0,
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
-
     // ✅ This will be type-safe and validated.
+    fetch("http://localhost:3000/api/bot", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: "user_2hNRWILa4kxcLntiWQ7H5TkmhfS",
+        botName: "Bot[" + Date.now().toString() + "]",
+        exchange: values.exchange,
+        tokenAddress: values.address,
+        walletsAmount: values.walletsAmount,
+        capitalAmount: values.capital,
+        expiryDate: Math.floor(
+          (Date.now() + 24 * 60 * 60 * 1000) / 1000
+        ).toString(),
+        overwrite: true,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("[SUCCESS_CREATING_BOT_QUERY]:", data))
+      .catch((error) => console.log("[ERROR_CREATING_BOT_QUERY]: ", error));
     console.log(values);
   }
 

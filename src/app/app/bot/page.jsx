@@ -4,9 +4,21 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import axios from "axios";
 import React, { use, useEffect, useState } from "react";
+import { set } from "react-hook-form";
 
 const Bot = () => {
   const [bot, setBot] = useState();
+  const [BotStatus, setBotStatus] = useState(false);
+  const onBotStart = async () => {
+    setBotStatus(true);
+    // Do something here to start the bot
+    alert("Bot Started...");
+  };
+  const onBotStop = async () => {
+    setBotStatus(false);
+    // Do something here to stop the bot
+    alert("Bot Stopped...");
+  };
   const setBotData = async () => {
     try {
       (async () => {
@@ -58,10 +70,17 @@ const Bot = () => {
                 {bot.TokenAddress ? bot.TokenAddress : "No Token Address"}
               </p>
             </div>
-            <Button variant="secondary" className="">
+            <div>
+              <h1 className="font-semibold">
+                Bot Status: {BotStatus ? "Running" : "Stopped"}
+              </h1>
+            </div>
+            <Button variant="secondary" onClick={onBotStart}>
               Start Bot
             </Button>
-            <Button variant="destructive">Stop Bot</Button>
+            <Button variant="destructive" onClick={onBotStop}>
+              Stop Bot
+            </Button>
           </>
         ) : (
           <p>Loading...</p>
