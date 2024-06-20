@@ -10,4 +10,6 @@ working on
 - POST, keypair.ts (*works)
 - BOT create, update, start working
 
+https://github.com/raydium-io/raydium-sdk-V2-demo/blob/master/src/config.ts.template
+
 BE USEFUL TO YOURSELF ATLEAST...
