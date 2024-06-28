@@ -44,7 +44,9 @@ const page = (props: Props) => {
         <DetailsForm />
       </Card>
       <Card className="px-8 py-5 m-7 shadow-2xl h-fit">
-        <h1 className="text-lg font-bold my-3">Account Details (Devnet)</h1>
+        <h1 className="text-lg font-bold my-3">
+          Account Details ({process.env.NEXT_PUBLIC_SOLANA_NETWORK})
+        </h1>
         {balance ? (
           <div className="flex gap-3 my-2">
             <h1 className="font-semibold">Balance :</h1>
