@@ -47,10 +47,7 @@ export default function RootLayout({
                 <div className="w-[10rem] my-5">
                   <Button className="tracking-wide" variant="ghost">
                     <Link href={'/app/dashboard'}>Dashboard</Link>
-                </Button>
-                <Button className="tracking-wide" variant="ghost">
-                  <Link href={'/app/bot'}>Bot</Link>
-                </Button>
+                  </Button>
                   <Button className="tracking-wide" variant="ghost">
                     Server Logs
                   </Button>

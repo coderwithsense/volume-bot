@@ -22,6 +22,16 @@ const Bot = () => {
   const setBotData = async () => {
     try {
       (async () => {
+        // const response = await fetch('/api/bot', {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        // });
+        // const data = await response.json();
+        // console.log('Bot Datdsda: ', data)
+        // setBot(data['bot']);
+        // console.log('Bot Data: ', bot)
         fetch("/api/bot", {
           method: "GET",
           headers: {
