@@ -60,7 +60,7 @@ const DetailsForm = (props: Props) => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    fetch("http://localhost:3000/api/bot", {
+    fetch("/api/bot", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
