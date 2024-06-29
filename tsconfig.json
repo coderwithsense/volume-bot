@@ -19,9 +19,9 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "$/*": ["./utils/*"],
+      "$/*": ["./utils/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/solana-daddy.js", "config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/solana-daddy.js", "config.js", "utils/core/swap.js"],
   "exclude": ["node_modules"]
 }
