@@ -1,21 +1,16 @@
 import { Connection, PublicKey, Keypair, Transaction, VersionedTransaction, TransactionMessage } from '@solana/web3.js'
-// import {
-//   Liquidity,
-//   LiquidityPoolKeys,
-//   jsonInfo2PoolKeys,
-//   LiquidityPoolJsonInfo,
-//   TokenAccount,
-//   Token,
-//   TokenAmount,
-//   TOKEN_PROGRAM_ID,
-//   Percent,
-//   SPL_ACCOUNT_LAYOUT,
-// } from "@raydium-io/raydium-sdk";
-import {Liquidity, SPL_ACCOUNT_LAYOUT} from "@raydium-io/raydium-sdk"
+import {
+  Liquidity,
+  jsonInfo2PoolKeys,
+  Token,
+  TokenAmount,
+  TOKEN_PROGRAM_ID,
+  Percent,
+  SPL_ACCOUNT_LAYOUT,
+} from "@raydium-io/raydium-sdk";
+// import { Liquidity, SPL_ACCOUNT_LAYOUT } from "@raydium-io/raydium-sdk"
 import { Wallet } from '@coral-xyz/anchor'
 import bs58 from 'bs58'
-
-// console.log(SPL_ACCOUNT_LAYOUT);
 /**
  * Class representing a Raydium Swap operation.
  */
@@ -95,7 +90,7 @@ class RaydiumSwap {
    */
   async getSwapTransaction(
     toToken,
-    // fromToken: string,
+    fromToken,
     amount,
     poolKeys,
     maxLamports = 100000,
