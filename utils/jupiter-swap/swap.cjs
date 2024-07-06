@@ -7,14 +7,12 @@ const base58 = require("bs58");
 // import { TOKEN_LIST_URL }  from "@jup-ag/core";
 // import { Connection } from "@solana/web3.js";
 
-const SOLANA_RPC_ENDPOINT =
-  "https://solana-mainnet.g.alchemy.com/v2/CJgyaDQq3FOXk6gmFEi0cDm8Te9beZoM";
+const SOLANA_RPC_ENDPOINT = "SOLANA_RPC_ENDPOINT";
 
 const ENV = "mainnet-beta";
 const connection = new Connection(SOLANA_RPC_ENDPOINT, "confirmed");
 
-const WALLET_PRIVATE_KEY =
-  "22sUmGv4VSSA9DNAiGHx4sSTQCaPeC9QXNZ6pMzfraXCj88AxsNhxnhwEKknNxiNgEWQRCNh74mFWw9sHk8jVFoc";
+const WALLET_PRIVATE_KEY = "SOLANA_PRIVATE_KEY";
 const USER_PRIVATE_KEY = base58.decode(WALLET_PRIVATE_KEY);
 const USER_KEYPAIR = Keypair.fromSecretKey(USER_PRIVATE_KEY);
 

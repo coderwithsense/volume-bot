@@ -14,13 +14,9 @@ const {
 } = require("@solana/spl-token");
 const base58 = require("bs58");
 
-const owner = Keypair.fromSecretKey(
-  base58.decode(
-    "22sUmGv4VSSA9DNAiGHx4sSTQCaPeC9QXNZ6pMzfraXCj88AxsNhxnhwEKknNxiNgEWQRCNh74mFWw9sHk8jVFoc"
-  )
-);
+const owner = Keypair.fromSecretKey(base58.decode("SOLANA_PRIVATE_KEY"));
 const connection = new Connection(
-  "https://solana-mainnet.g.alchemy.com/v2/CJgyaDQq3FOXk6gmFEi0cDm8Te9beZoM"
+  "SOLANA_RPC_ENDPOINT"
 ); //<YOUR_RPC_URL>
 // export const connection = new Connection(clusterApiUrl('devnet')) //<YOUR_RPC_URL>
 const txVersion = TxVersion.V0; // or TxVersion.LEGACY
@@ -62,8 +58,7 @@ const fetchTokenAccountData = async () => {
   return tokenAccountData;
 };
 
-const SOLANA_RPC_ENDPOINT =
-  "https://solana-mainnet.g.alchemy.com/v2/CJgyaDQq3FOXk6gmFEi0cDm8Te9beZoM";
+const SOLANA_RPC_ENDPOINT = "SOLANA_RPC_ENDPOINT";
 
 const main = async () => {
   console.time("Execution Time");

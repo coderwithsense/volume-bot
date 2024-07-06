@@ -12,9 +12,9 @@ const { TOKEN_PROGRAM_ID, TOKEN_2022_PROGRAM_ID } = require("@solana/spl-token")
 const base58 = require("bs58");
 
 const owner = Keypair.fromSecretKey(
-  base58.decode("22sUmGv4VSSA9DNAiGHx4sSTQCaPeC9QXNZ6pMzfraXCj88AxsNhxnhwEKknNxiNgEWQRCNh74mFWw9sHk8jVFoc")
+  base58.decode("SOLANA_PRIVATE_KEY")
 );
-const connection = new Connection("https://solana-mainnet.g.alchemy.com/v2/CJgyaDQq3FOXk6gmFEi0cDm8Te9beZoM"); //<YOUR_RPC_URL>
+const connection = new Connection("SOLANA_RPC_ENDPOINT"); //<YOUR_RPC_URL>
 // export const connection = new Connection(clusterApiUrl('devnet')) //<YOUR_RPC_URL>
 const txVersion = TxVersion.V0; // or TxVersion.LEGACY
 const cluster = "mainnet"; // 'mainnet' | 'devnet'
