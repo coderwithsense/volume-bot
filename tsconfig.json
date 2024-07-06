@@ -22,6 +22,6 @@
       "$/*": ["./utils/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/solana-daddy.js", "config.js", "utils/core/swap.js", "utils/core/swapConfig.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/solana-daddy.js", "config.js", "utils/core/swap.js", "utils/core/swapConfig.js", "utils/hardCore/config.js"],
   "exclude": ["node_modules"]
 }
